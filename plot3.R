@@ -75,5 +75,12 @@ plot(workingData$FullDate,
      ylab = "",
      xlab = "",
      axes = F)
-legend("topright")
+par(new=T)
+legend("topright", 
+       lty = c(1,1), 
+       lwd = c(2,2), 
+       legend = c("Sub_metering_1",
+                  "Sub_metering_2",
+                  "Submetering_3"), 
+       col = c("black","red","blue"))
 dev.off()

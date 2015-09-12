@@ -45,3 +45,35 @@ householdData$Sub_metering_3 <- as.numeric(
             householdData$Sub_metering_3
       )
 )
+## Grab the dates we actually care about
+workingData <- householdData[
+      householdData$Date %in% c(as.Date("2007-02-01"), as.Date("2007-02-02")), 
+      ]
+## Create the plot
+png(filename = "/tmp/plot3.png")
+plot(workingData$FullDate, 
+     workingData$Sub_metering_1, 
+     type = "l", 
+     xlim = range(workingData$FullDate),
+     ylim = range(workingData$Sub_metering_1),
+     ylab = "Energy sub metering",
+     xlab = ""
+     )
+par(new=T)
+plot(workingData$FullDate, 
+     workingData$Sub_metering_2, 
+     type = "l", 
+     col = "red",     
+     ylab = "",
+     xlab = "",
+     axes = F)
+par(new=T)
+plot(workingData$FullDate, 
+     workingData$Sub_metering_3, 
+     type = "l", 
+     col = "blue",     
+     ylab = "",
+     xlab = "",
+     axes = F)
+legend("topright")
+dev.off()

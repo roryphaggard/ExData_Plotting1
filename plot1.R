@@ -2,11 +2,11 @@
 library(lubridate)
 ## Retrieve the data
 download.file(url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
-              ddestfile = "/tmp/household-data-set.zip",
-              method = curl,
+              destfile = "/tmp/household-data-set.zip",
+              method = "wget",
               quiet = TRUE
 )
-unzip("/tmp/household-data-set.zip")
+unzip("/tmp/household-data-set.zip", exdir = "/tmp")
 ## Read in the data
 ## NB: factor chosen to speed initial read
 householdData <- read.table(
@@ -23,10 +23,8 @@ householdData <- read.table(
                      "factor",
                      "factor"),
       nrows = 2075260
-)
+      )
 ## Coerce the needful data into its proper data types
-householdData$Date <- as.Date(dmy(householdData$Date))
-householdData$Time <- hms(householdData$Time)
 householdData$Global_active_power <- as.numeric(
       as.character(
             householdData$Global_active_power

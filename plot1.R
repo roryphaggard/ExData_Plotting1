@@ -25,6 +25,8 @@ householdData <- read.table(
       nrows = 2075260
       )
 ## Coerce the needful data into its proper data types
+householdData$Date <- as.Date(dmy(householdData$Date))
+householdData$Time <- hms(householdData$Time)
 householdData$Global_active_power <- as.numeric(
       as.character(
             householdData$Global_active_power
